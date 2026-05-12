@@ -15,13 +15,13 @@ Before using it:
 - Review every change the tool suggests before applying it to a live script
 - Keep a backup of your original scripts before making any changes
 
-If you have questions regarding migrating ScriptRunner to Cloud, speak to a ScriptRunner [Customer Success Manager](https://www.scriptrunnerhq.com/locker/customer-success-team).
+If you have questions, speak to your Adaptavist Customer Success Manager.
 
 ---
 
 ## What Problem Does This Solve?
 
-When you migrate from Jira Data Center to Jira Cloud using JCMA (Jira Cloud Migration Assistant), internal numeric IDs can change. This includes:
+When you migrate from Jira Data Center to Jira Cloud using JCMA (Jira Cloud Migration Assistant), all internal numeric IDs change. This includes:
 
 - Custom field IDs (e.g. `customfield_10001` on DC becomes `customfield_10500` on Cloud)
 - Custom field option IDs (the IDs for select list values, radio buttons, checkboxes, cascading selects, etc.)
@@ -38,10 +38,10 @@ If your ScriptRunner scripts reference any of these IDs directly — which is ve
 The toolkit has two parts:
 
 **Part 1 — Export your IDs**
-Two scripts export all IDs from your DC instance (before migration) and your Cloud instance (after migration) as CSV. You do not need to save these as files — you can copy and paste the output directly into the find-and-replace tool.
+Three scripts export all IDs from your DC instance (before migration) and your Cloud instance (after migration) as CSV — one script runs on DC, two run on Cloud. You do not need to save these as files — you can copy and paste the output directly into the find-and-replace tool.
 
 **Part 2 — Find and replace**
-A third script takes those two CSV outputs and a ScriptRunner script you want to fix. It scans for DC IDs, replaces them where it can, and gives you a full report and an updated script ready to test.
+A fourth script takes those CSV outputs and a ScriptRunner script you want to fix. It scans for DC IDs, replaces them where it can, and gives you a full report and an updated script ready to test.
 
 ### What it replaces automatically
 - `customfield_XXXXX` string patterns — e.g. `issue.get('customfield_11000')`
@@ -54,7 +54,7 @@ A third script takes those two CSV outputs and a ScriptRunner script you want to
 - Bare numeric IDs where the context is ambiguous — the tool picks the most likely match and flags it as **BEST GUESS**. You must verify these before using the updated script.
 
 ### What it cannot do
-- **DC Groovy Behaviour scripts** — Cloud Behaviours use TypeScript, not Groovy. The tool detects these scripts and tells you what to do, The tool detects these and directs you to SMS for conversion. Once SMS has converted the script to TypeScript, paste it back into the tool to fix the custom field IDs. See the Behaviours section below.
+- **DC Groovy Behaviour scripts** — Cloud Behaviours use TypeScript, not Groovy. The tool detects these and directs you to SMS for conversion. Once SMS has converted the script to TypeScript, paste it back into the tool to fix the custom field IDs. See the Behaviours section below.
 - It cannot scan your ScriptRunner scripts automatically — you must paste each script in manually
 - It cannot update scripts in ScriptRunner for you — you must copy the fixed script back yourself
 - It cannot resolve IDs for entities that did not migrate (e.g. custom issue types not in a project scheme)
@@ -165,12 +165,12 @@ The Cloud export is split into two scripts. Run both. This is intentional — sp
    ```
    "EntityType","Name","ParentName","Cloud_ID","Status"
    ```
-10. Keep copying until the last `CustomFieldOption` line
+10. Keep copying until the last data line before the CSV END marker
 11. Stop when you see — **ignore it, do not copy it:**
     ```
     >>>>>>>>>> CSV END <<<<<<<<<<
     ```
-12. Keep this output ready — you will paste it into `CLOUD_CSV` in Step 4
+12. Keep this output ready — you will paste it into `CLOUD_CSV_FIELDS` in Step 4
 
 > **Note:** This script only fetches options for fields that support them (select lists, multi-selects, radio buttons, checkboxes, cascading selects). All other field types are exported without making extra API calls. This keeps the script fast on large instances.
 
@@ -185,7 +185,7 @@ The Cloud export is split into two scripts. Run both. This is intentional — sp
 5. Click the **Logs tab**
 6. Scroll to the very bottom
 7. Copy the output between the markers, exactly as in Step 3a
-8. Keep this output ready — you will paste it directly below the fields output in Step 4
+8. Keep this output ready — you will paste it into `CLOUD_CSV_SYSTEM` in Step 4
 
 > **Note:** This script makes only 5 API calls (issue types, statuses, priorities, resolutions, projects) and completes in seconds regardless of instance size.
 
@@ -199,7 +199,7 @@ Repeat this step for every ScriptRunner script you want to fix.
 2. Go to **ScriptRunner → Script Console**
 3. Open the file `scripts/find-and-replace.groovy` from this repository
 4. Copy the entire script and paste it into the Script Console
-5. Find **SECTION 1 — YOUR INPUTS** at the top of the script
+5. Find the **YOUR INPUTS** section at the very top of the script
 6. Paste your DC export output into `DC_CSV`
 7. Paste your fields export output (from Step 3a) into `CLOUD_CSV_FIELDS`
 8. Paste your system export output (from Step 3b) into `CLOUD_CSV_SYSTEM`

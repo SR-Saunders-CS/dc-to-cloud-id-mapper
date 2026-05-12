@@ -21,7 +21,7 @@ If you have questions regarding migrating ScriptRunner to Cloud, speak to a Scri
 
 ## What Problem Does This Solve?
 
-When you migrate from Jira Data Center to Jira Cloud using JCMA (Jira Cloud Migration Assistant), all internal numeric IDs change. This includes:
+When you migrate from Jira Data Center to Jira Cloud using JCMA (Jira Cloud Migration Assistant), internal numeric IDs can change. This includes:
 
 - Custom field IDs (e.g. `customfield_10001` on DC becomes `customfield_10500` on Cloud)
 - Custom field option IDs (the IDs for select list values, radio buttons, checkboxes, cascading selects, etc.)

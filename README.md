@@ -97,4 +97,4 @@ For detailed step-by-step instructions, the full limitations list, and the findi
 
 ## Questions?
 
-Speak to your Adaptavist Customer Success Manager.
+Speak to a ScriptRunner [Customer Success Manager](https://www.scriptrunnerhq.com/locker/customer-success-team).

@@ -41,7 +41,7 @@ Names stay the same during JCMA migration — IDs do not. This toolkit exports a
 ## The Four Steps
 
 **Step 1 — Export from your DC instance**
-Run [`scripts/dc-export.groovy`](scripts/dc-export.groovy) in ScriptRunner DC → Script Console. Copy the output from the Logs tab.
+Run [`scripts/dc-export.groovy`](scripts/dc-export.groovy) in ScriptRunner DC → Script Console. Copy the output from the Logs tab (please read each indivdual scripts comment section, regarding what to copy).
 
 > ⚠️ **Do this before you shut down your DC instance.** Once DC is gone, the IDs are gone with it and this toolkit cannot help you. If DC is still live — even temporarily post-migration — run this now.
 

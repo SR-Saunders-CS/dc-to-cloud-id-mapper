@@ -173,8 +173,7 @@ The Cloud export is split into two scripts. Run both. This is intentional — sp
 
 > **Note:** This script only fetches options for fields that support them (select lists, multi-selects, radio buttons, checkboxes, cascading selects). All other field types are exported without making extra API calls. This keeps the script fast on large instances.
 
-> **Note:** On instances with a large number of custom fields, this script may still take a minute or two. This is normal. If it times out (240 second limit), contact your Adaptavist Customer Success Manager.
-
+> **Note:** On instances with a large number of custom fields, this script may still take a minute or two. This is normal. However, it is expected to timeout after (240 second limit).
 ### Step 3b — Export system entities
 
 1. Still in **ScriptRunner → Script Console** on your Cloud instance
@@ -272,7 +271,7 @@ This is a proof of concept. The following limitations are known and documented.
 
 6. **Script Variables are not covered.** IDs stored in ScriptRunner Script Variables are not detected or updated by this tool.
 
-7. **The Cloud fields export may be slow on very large instances.** ScriptRunner Cloud scripts have a 240 second execution limit. The fields export script only fetches options for select-type fields and uses pagination, which significantly reduces the number of API calls compared to earlier versions. It has been tested on instances with ~94 custom fields. On instances with significantly more fields, it may still approach the time limit. If it times out, contact your Adaptavist Customer Success Manager.
+7. **The Cloud fields export may be slow on very large instances.** ScriptRunner Cloud scripts have a 240 second execution limit. The fields export script only fetches options for select-type fields and uses pagination, which significantly reduces the number of API calls compared to earlier versions. It has been tested on instances with ~94 custom fields. On instances with significantly more fields, it may still approach the time limit. 
 
 8. **DC Groovy Behaviours cannot be fixed directly.** Cloud Behaviours use TypeScript, not Groovy. The tool detects DC Groovy Behaviours and directs you to SMS for conversion. However, once SMS has converted the script to TypeScript, you can paste the TypeScript output back into the find-and-replace tool to update the custom field IDs. See the Behaviours section above.
 

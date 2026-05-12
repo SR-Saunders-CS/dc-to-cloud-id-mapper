@@ -15,7 +15,7 @@ Before using it:
 - Review every change the tool suggests before applying it to a live script
 - Keep a backup of your original scripts before making any changes
 
-If you have questions, speak to your Adaptavist Customer Success Manager.
+If you have questions regarding migrating ScriptRunner to Cloud, speak to a ScriptRunner [Customer Success Manager](https://www.scriptrunnerhq.com/locker/customer-success-team).
 
 ---
 

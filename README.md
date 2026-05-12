@@ -19,9 +19,9 @@ The typical migration journey looks like this:
 2. **Migrate your ScriptRunner scripts** — use the [ScriptRunner Migration Suite (SMS)](https://migrationsuite.scriptrunnerhq.com/) to move your scripts to Cloud
 3. **Fix the IDs** — this is where this toolkit comes in
 
-SMS gets your scripts onto Cloud. But JCMA changes every internal numeric ID during migration — custom field IDs, option IDs, issue type IDs, status IDs, project IDs — all of them. Scripts that reference those IDs directly will be pointing at IDs that no longer exist. **This toolkit finds those IDs and replaces them.**
+SMS converts your DC scripts into Cloud compatible script. But JCMA can change every internal numeric ID during migration — custom field IDs, option IDs, issue type IDs, status IDs, project IDs — all of them. Scripts that reference those IDs directly will be pointing at IDs that no longer exist (or are now different). **This toolkit finds those IDs and replaces them.** one script at a time, of your choosing.
 
-If that's where you are — scripts on Cloud, IDs wrong — read on.
+If that's where you are — scripts on Cloud, IDs are wrong — read on.
 
 ---
 

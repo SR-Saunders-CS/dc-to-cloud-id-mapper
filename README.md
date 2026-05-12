@@ -5,7 +5,7 @@
 > It comes with no warranty, no support SLA, and no guarantee it will work on your specific instance.
 > **Test every updated script thoroughly before using it in production.**
 > If you have questions regarding how to migrate from DC to Cloud, speak to a ScriptRunner Customer Success Manager.
-> Visit [Customer Success Team Locker](https://www.scriptrunnerhq.com/locker/customer-success-team) for resources.
+> Visit [Customer Success Team Locker](https://www.scriptrunnerhq.com/locker/customer-success-team).
 
 A proof-of-concept toolkit that fixes hardcoded IDs in ScriptRunner scripts after a Jira Data Center to Cloud migration.
 

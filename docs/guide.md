@@ -335,7 +335,7 @@ The following findings were made during development and testing. They are docume
 
 ## Getting Help
 
-If you get stuck, contact your Adaptavist Customer Success Manager.
+If you need to talk migrating ScriptRunner to Cloud, speak to a ScriptRunner [Customer Success Manager](https://www.scriptrunnerhq.com/locker/customer-success-team).
 
 For DC Groovy Behaviour migration specifically, the ScriptRunner Migration Suite is the right tool:
 - https://migrationsuite.scriptrunnerhq.com/

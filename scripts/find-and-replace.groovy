@@ -1,5 +1,6 @@
 // ============================================================
 // SRM ID MAPPING TOOLKIT — FIND & REPLACE TOOL
+// Version 4
 // Run in: ScriptRunner Cloud > Script Console
 //
 // WHAT THIS SCRIPT DOES:
@@ -237,20 +238,62 @@ if (!idMapping) {
 if (MODE == 'SHOW_MAPPING') {
     String W = ('═' * 64).toString()
     String N = ('─' * 64).toString()
+    String D = ('·' * 64).toString()
+
+    // Count summary
+    int totalOk         = idMapping.count { it.status == 'OK' } as int
+    int totalUnresolved = idMapping.count { it.status == 'UNRESOLVED' } as int
+    int totalAmbiguous  = idMapping.count { it.status == 'AMBIGUOUS' } as int
 
     StringBuilder out = new StringBuilder()
     out.append('\n').append(W).append('\n')
     out.append('  SRM ID MAPPING TOOLKIT — FULL MAPPING REFERENCE\n')
-    out.append("  ${idMapping.size()} entries built from your DC and Cloud exports\n".toString())
     out.append(W).append('\n')
 
+    // Summary
+    out.append('\n  SUMMARY\n')
+    out.append(N).append('\n')
+    out.append("  Total entries:   ${idMapping.size()}\n".toString())
+    out.append("  ✅ Clean:        ${totalOk} — mapped automatically, safe to replace\n".toString())
+    out.append("  ⚠️  Ambiguous:   ${totalAmbiguous} — duplicate names, cannot pick safely\n".toString())
+    out.append("  ❌ Unresolved:   ${totalUnresolved} — not found on Cloud, manual action needed\n".toString())
+
+    // Legend
+    out.append('\n  WHAT THE FLAGS MEAN\n')
+    out.append(N).append('\n')
+    out.append('  ✅ (no flag)        Clean match — DC ID mapped to Cloud ID by name.\n')
+    out.append('                      The tool will replace this automatically.\n')
+    out.append('\n')
+    out.append('  ← duplicate name ⚠  Two or more entities share the same name.\n')
+    out.append('                      The tool cannot safely pick which is which.\n')
+    out.append('                      ACTION: find the correct Cloud ID manually\n')
+    out.append('                      and update your script yourself.\n')
+    out.append('\n')
+    out.append('  ← not migrated      This entity exists on DC but was not found\n')
+    out.append('                      on Cloud. It may not have migrated, or JCMA\n')
+    out.append('                      renamed it (e.g. added "(migrated)").\n')
+    out.append('                      ACTION: check your Cloud instance. If the\n')
+    out.append('                      entity exists under a different name, update\n')
+    out.append('                      your script manually with the correct Cloud ID.\n')
+    out.append('                      If it does not exist, recreate it on Cloud first.\n')
+    out.append(D).append('\n')
+    out.append('  💡 TIP: Use this table to look up IDs manually when the\n')
+    out.append('     find-and-replace tool flags something as BEST GUESS\n')
+    out.append('     or UNRESOLVED in your script report.\n')
+
+    // Mapping table by entity type
     ['CustomField', 'CustomFieldOption', 'IssueType',
      'Status', 'Priority', 'Resolution', 'Project'].each { String et ->
         List<MappingEntry> group = idMapping.findAll { MappingEntry e ->
             e.entityType == et
         }
         if (!group) return
-        out.append("\n  ${et.toUpperCase()} (${group.size()})\n".toString())
+
+        int groupOk         = group.count { it.status == 'OK' } as int
+        int groupUnresolved = group.count { it.status == 'UNRESOLVED' } as int
+        int groupAmbiguous  = group.count { it.status == 'AMBIGUOUS' } as int
+
+        out.append("\n  ${et.toUpperCase()} (${group.size()} total — ${groupOk} clean, ${groupAmbiguous} ambiguous, ${groupUnresolved} unresolved)\n".toString())
         out.append(N).append('\n')
         out.append("  ${'DC ID'.padRight(26)}${'Cloud ID'.padRight(26)}${'Name'.padRight(32)}Parent / Key\n".toString())
         out.append(N).append('\n')

@@ -1,6 +1,5 @@
 // ============================================================
 // SRM ID MAPPING TOOLKIT — FIND & REPLACE TOOL
-// Version 4
 // Run in: ScriptRunner Cloud > Script Console
 //
 // WHAT THIS SCRIPT DOES:

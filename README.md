@@ -4,8 +4,7 @@
 > **This is not an official Adaptavist product.**
 > It comes with no warranty, no support SLA, and no guarantee it will work on your specific instance.
 > **Test every updated script thoroughly before using it in production.**
-> If you have questions regarding how to migrate from DC to Cloud, speak to a ScriptRunner Customer Success Manager.
-> Visit [Customer Success Team link](https://www.scriptrunnerhq.com/locker/customer-success-team).
+> If you have questions regarding how to migrate from DC to Cloud, speak to a ScriptRunner [Customer Success Manager](https://www.scriptrunnerhq.com/locker/customer-success-team).
 
 A proof-of-concept toolkit that fixes hardcoded IDs in ScriptRunner scripts after a Jira Data Center to Cloud migration.
 
@@ -42,16 +41,16 @@ Names stay the same during JCMA migration — IDs do not. This toolkit exports a
 ## The Four Steps
 
 **Step 1 — Export from your DC instance**
-Run `scripts/dc-export.groovy` in ScriptRunner DC → Script Console. Copy the output from the Logs tab.
+Run [`scripts/dc-export.groovy`](scripts/dc-export.groovy) in ScriptRunner DC → Script Console. Copy the output from the Logs tab.
 
 > ⚠️ **Do this before you shut down your DC instance.** Once DC is gone, the IDs are gone with it and this toolkit cannot help you. If DC is still live — even temporarily post-migration — run this now.
 
 **Step 2 — Export from Cloud**
-Run `scripts/cloud-export-fields.groovy` in ScriptRunner Cloud → Script Console. Copy the output from the Logs tab.
-Then run `scripts/cloud-export-system.groovy` and copy that output too.
+Run [`scripts/cloud-export-fields.groovy`](scripts/cloud-export-fields.groovy) in ScriptRunner Cloud → Script Console. Copy the output from the Logs tab.
+Then run [`scripts/cloud-export-system.groovy`](scripts/cloud-export-system.groovy) and copy that output too.
 
 **Step 3 — Fix your script**
-Run `scripts/find-and-replace.groovy` in ScriptRunner Cloud → Script Console.
+Run [`scripts/find-and-replace.groovy`](scripts/find-and-replace.groovy) in ScriptRunner Cloud → Script Console.
 Paste your DC export into `DC_CSV`, your fields export into `CLOUD_CSV_FIELDS`, your system export into `CLOUD_CSV_SYSTEM`, and the script you want to fix into `SCRIPT_TO_FIX`. Run it.
 
 **Step 4 — Read the report**

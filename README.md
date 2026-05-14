@@ -6,7 +6,7 @@
 > **Test every updated script thoroughly before using it in production.**
 > If you have questions regarding how to migrate from DC to Cloud, speak to a ScriptRunner [Customer Success Manager](https://www.scriptrunnerhq.com/locker/customer-success-team).
 
-A proof-of-concept toolkit that fixes hardcoded IDs in ScriptRunner scripts after a Jira Data Center to Cloud migration.
+A proof-of-concept toolkit that assists with hardcoded IDs in ScriptRunner scripts after a Jira Data Center to Cloud migration.
 
 ---
 
